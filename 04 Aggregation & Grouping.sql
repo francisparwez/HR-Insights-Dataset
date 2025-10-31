@@ -81,3 +81,40 @@ GROUP BY
 ORDER BY 
     avg_tenure_years DESC;
 
+-- 8. Find the department with the longest-serving manager.
+
+SELECT 
+    d.dept_name,
+    CONCAT(e.first_name, ' ', e.last_name) AS manager_name,
+    CONCAT(
+        FLOOR(DATEDIFF(dm.to_date, dm.from_date) / 365.25), ' Years, ',
+        FLOOR((DATEDIFF(dm.to_date, dm.from_date) % 365.25) / 30.44), ' Months, ',
+        FLOOR((DATEDIFF(dm.to_date, dm.from_date) % 30.44)), ' Days'
+    ) AS employment_tenure
+FROM dept_manager dm
+JOIN departments d ON dm.dept_no = d.dept_no
+JOIN employees e ON dm.emp_no = e.emp_no
+ORDER BY DATEDIFF(dm.to_date, dm.from_date) DESC
+LIMIT 1;
+
+-- 9. Find how many employees have salaries above 90,000.
+
+SELECT
+    COUNT(*) AS num_of_emp_over_90000
+FROM
+    salaries
+WHERE
+    salary > 90000;
+
+-- 10. List the top 5 highest-paid employees.
+
+SELECT
+    CONCAT(e.first_name, ' ', e.last_name) AS employee_name,
+    s.salary
+FROM
+    employees e
+JOIN
+    salaries s ON e.emp_no = s.emp_no
+ORDER BY s.salary DESC
+LIMIT 5;
+
