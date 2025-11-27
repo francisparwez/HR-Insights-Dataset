@@ -74,3 +74,21 @@ WHERE de.dept_no IN (
     JOIN employees m ON dm.emp_no = m.emp_no
     WHERE m.first_name = 'John' AND m.last_name = 'Smith'
 );
+
+-- 6. Get each employee’s title history and salary side-by-side.
+
+SELECT
+    e.emp_no AS employee_no,
+    CONCAT(e.first_name, ' ', e.last_name) AS employee_name,
+    ti.title AS title,
+    ti.from_date AS title_from,
+    ti.to_date AS title_to,
+    s.salary AS salary,
+    s.from_date AS salary_from,
+    s.to_date AS salary_to
+FROM employees e
+JOIN titles ti ON e.emp_no = ti.emp_no
+JOIN salaries s ON ti.emp_no = s.emp_no
+ORDER BY e.emp_no, ti.from_date;
+SELECT * FROM titles;
+SELECT * FROM salaries;
