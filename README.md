@@ -184,9 +184,9 @@ By the end, you’ll be fluent in writing queries that drive **data-driven HR de
 
 | Day | Focus Area | Status |
 |:----|:------------|:-------|
-| 1 | Employee Basics | ⬜ |
-| 2 | Aggregations | ⬜ |
-| 3 | Joins | ⬜ |
+| 1 | Employee Basics | ☑️ |
+| 2 | Aggregations | ☑️ |
+| 3 | Joins | ☑️ |
 | 4 | Subqueries | ⬜ |
 | 5 | Date & Time | ⬜ |
 | 6 | Window Functions | ⬜ |
@@ -208,4 +208,4 @@ Once you complete this challenge, apply your queries to:
 ### 🧰 License
 Feel free to fork, use, or adapt this challenge for learning.  
 Attribution appreciated:  
-`Created by [Your Name] | HR SQL Data Science Challenge`
+`Created by Francis Parwez | HR SQL Data Science Challenge`
