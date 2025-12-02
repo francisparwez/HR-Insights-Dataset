@@ -90,5 +90,32 @@ FROM employees e
 JOIN titles ti ON e.emp_no = ti.emp_no
 JOIN salaries s ON ti.emp_no = s.emp_no
 ORDER BY e.emp_no, ti.from_date;
-SELECT * FROM titles;
-SELECT * FROM salaries;
+
+-- 7. Find employees whose salary is higher than their department’s average salary.
+
+SELECT 
+    e.emp_no,
+    e.first_name,
+    e.last_name,
+    d.dept_name,
+    s.salary
+FROM employees e
+JOIN dept_emp de ON e.emp_no = de.emp_no
+JOIN salaries s ON e.emp_no = s.emp_no
+JOIN departments d ON de.dept_no = d.dept_no
+WHERE s.salary > (
+    SELECT AVG(s2.salary)
+    FROM dept_emp de2
+    JOIN salaries s2 ON de2.emp_no = s2.emp_no
+    WHERE de2.dept_no = de.dept_no
+);
+
+-- 8. List departments and the average salary of their managers.
+
+SELECT 
+    d.dept_name,
+    ROUND(AVG(s.salary), 0) AS avg_manager_salary
+FROM departments d
+JOIN dept_manager dm ON d.dept_no = dm.dept_no
+JOIN salaries s ON dm.emp_no = s.emp_no
+GROUP BY d.dept_name;
