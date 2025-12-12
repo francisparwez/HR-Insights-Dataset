@@ -119,3 +119,15 @@ FROM departments d
 JOIN dept_manager dm ON d.dept_no = dm.dept_no
 JOIN salaries s ON dm.emp_no = s.emp_no
 GROUP BY d.dept_name;
+
+-- 9. Show all employees and indicate if they were ever a manager (Yes/No).
+SELECT
+    e.emp_no,
+    CONCAT(e.first_name, ' ', e.last_name),
+    CASE
+        WHEN dm.emp_no IS NOT NULL THEN 'Yes'
+        ELSE 'No'
+    END AS is_manager
+FROM employees e
+LEFT JOIN dept_manager dm ON e.emp_no = dm.emp_no
+ORDER BY e.emp_no;
